@@ -50,6 +50,7 @@ mkdir -p "${TARGET_DIR}/.aas"
 mkdir -p "${TARGET_DIR}/Scripts"
 mkdir -p "${TARGET_DIR}/docs/adr"
 mkdir -p "${TARGET_DIR}/docs/architecture"
+mkdir -p "${TARGET_DIR}/docs/specs/templates"
 
 # 3. Sao chép Rules (Core + Apple Platform)
 echo "📋 Đang sao chép Rules vào .agents/rules/..."
@@ -69,12 +70,13 @@ fi
 echo "⚓ Đang tạo Swift Project Anchor AGENTS.md..."
 cp -f "${AAS_SRC}/templates/project-AGENTS.md" "${TARGET_DIR}/AGENTS.md"
 
-# 6. Sao chép Manifest, ADR template & Tooling scripts
-echo "🛠️  Đang cài đặt Manifest, ADR Template và Validation Scripts..."
+# 6. Sao chép Manifest, ADR template, Spec-Kit templates & Tooling scripts
+echo "🛠️  Đang cài đặt Manifest, Spec-Kit Templates và Validation Scripts..."
 cp -f "${AAS_SRC}/templates/project-manifest.yaml" "${TARGET_DIR}/.aas/project.yaml"
 if [ ! -f "${TARGET_DIR}/docs/adr/000-template.md" ]; then
     cp -f "${AAS_SRC}/templates/ADR.md" "${TARGET_DIR}/docs/adr/000-template.md"
 fi
+cp -f "${AAS_SRC}/templates/spec-kit/"* "${TARGET_DIR}/docs/specs/templates/"
 cp -f "${AAS_SRC}/Scripts/"*.sh "${TARGET_DIR}/Scripts/"
 chmod +x "${TARGET_DIR}/Scripts/"*.sh
 
@@ -88,7 +90,8 @@ echo "✅ [AAS] Cài đặt Swift macOS Workspace thành công!"
 echo "📁 Các file đã được đặt vào đúng vị trí:"
 echo "   - Project Anchor:       ./AGENTS.md (< 120 dòng)"
 echo "   - Workspace Rules:      ./.agents/rules/ (12 rules)"
-echo "   - Workspace Skills:     ./.agents/skills/ (11 skills)"
+echo "   - Workspace Skills:     ./.agents/skills/ (12 skills, bao gồm spec-driven-development)"
+echo "   - Spec-Kit Templates:   ./docs/specs/templates/ (spec, plan, tasks)"
 echo "   - Project Manifest:     ./.aas/project.yaml"
 echo "   - Architecture Scripts: ./Scripts/*.sh"
-echo "🎉 Agent Antigravity đã sẵn sàng cho dự án Swift macOS!"
+echo "🎉 Agent Antigravity đã sẵn sàng cho dự án Swift macOS với quy trình SDD!"

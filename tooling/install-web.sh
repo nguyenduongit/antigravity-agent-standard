@@ -49,6 +49,7 @@ mkdir -p "${TARGET_DIR}/.agents/skills"
 mkdir -p "${TARGET_DIR}/.aas"
 mkdir -p "${TARGET_DIR}/docs/adr"
 mkdir -p "${TARGET_DIR}/docs/architecture"
+mkdir -p "${TARGET_DIR}/docs/specs/templates"
 
 # 3. Sao chép Rules (Core + Web Platform)
 echo "📋 Đang sao chép Rules vào .agents/rules/..."
@@ -68,12 +69,13 @@ fi
 echo "⚓ Đang tạo Web Project Anchor AGENTS.md..."
 cp -f "${AAS_SRC}/templates/project-AGENTS-web.md" "${TARGET_DIR}/AGENTS.md"
 
-# 6. Sao chép Manifest & ADR template
-echo "🛠️  Đang cài đặt Web Manifest và ADR Template..."
+# 6. Sao chép Manifest, ADR template & Spec-Kit templates
+echo "🛠️  Đang cài đặt Web Manifest, ADR và Spec-Kit Templates..."
 cp -f "${AAS_SRC}/templates/project-manifest-web.yaml" "${TARGET_DIR}/.aas/project.yaml"
 if [ ! -f "${TARGET_DIR}/docs/adr/000-template.md" ]; then
     cp -f "${AAS_SRC}/templates/ADR.md" "${TARGET_DIR}/docs/adr/000-template.md"
 fi
+cp -f "${AAS_SRC}/templates/spec-kit/"* "${TARGET_DIR}/docs/specs/templates/"
 
 # 7. Dọn dẹp thư mục tạm
 if [ "$CLEANUP_TMP" = true ] && [ -d "${TMP_CLONE_DIR}" ]; then
@@ -83,8 +85,9 @@ fi
 echo ""
 echo "✅ [AAS] Cài đặt Web App Workspace thành công!"
 echo "📁 Các file đã được đặt vào đúng vị trí:"
-echo "   - Project Anchor:    ./AGENTS.md (< 120 dòng)"
-echo "   - Workspace Rules:   ./.agents/rules/ (12 rules)"
-echo "   - Workspace Skills:  ./.agents/skills/ (11 skills)"
-echo "   - Project Manifest:  ./.aas/project.yaml"
-echo "🎉 Agent Antigravity đã sẵn sàng cho dự án Web App (Next.js + Supabase)!"
+echo "   - Project Anchor:      ./AGENTS.md (< 120 dòng)"
+echo "   - Workspace Rules:     ./.agents/rules/ (12 rules)"
+echo "   - Workspace Skills:    ./.agents/skills/ (12 skills, bao gồm spec-driven-development)"
+echo "   - Spec-Kit Templates:  ./docs/specs/templates/ (spec, plan, tasks)"
+echo "   - Project Manifest:    ./.aas/project.yaml"
+echo "🎉 Agent Antigravity đã sẵn sàng cho dự án Web App với quy trình SDD!"

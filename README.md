@@ -1,8 +1,8 @@
 # Antigravity Agent Standard (AAS)
 
-> **Version:** 1.1.0  
+> **Version:** 1.2.0  
 > **Target Engine:** Google Antigravity  
-> **Philosophy:** Strict Engineering Governance, Progressive Disclosure, Zero Vibe-Coding.
+> **Philosophy:** Strict Engineering Governance, Spec-Driven Development (SDD), Zero Vibe-Coding.
 
 ---
 
@@ -14,7 +14,7 @@ Chọn đúng loại dự án của bạn, mở Terminal tại **thư mục gố
 
 ### 🍎 1. Dành Cho Dự Án Swift macOS (Swift 6, SPM, SwiftUI)
 
-> **Cài đặt:** AAS Core + Apple Platform Pack (`.agents/rules/`, `.agents/skills/`, `AGENTS.md` Swift Anchor, scripts kiểm tra SPM).
+> **Cài đặt:** AAS Core + Apple Platform Pack + Native Spec-Kit Templates (`.agents/rules/`, `.agents/skills/`, `AGENTS.md` Swift Anchor, scripts kiểm tra SPM, templates SDD).
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nguyenduongit/antigravity-agent-standard/main/tooling/install-swift.sh | bash
@@ -35,7 +35,7 @@ rm -rf "$TMP_DIR"
 
 ### 🌐 2. Dành Cho Dự Án Web App (Next.js + Supabase Edge-First)
 
-> **Cài đặt:** AAS Core + Web Platform Pack (`.agents/rules/`, `.agents/skills/`, `AGENTS.md` Web Anchor, Zod contracts standard, 100% RLS policies).
+> **Cài đặt:** AAS Core + Web Platform Pack + Native Spec-Kit Templates (`.agents/rules/`, `.agents/skills/`, `AGENTS.md` Web Anchor, Zod contracts standard, 100% RLS policies, templates SDD).
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nguyenduongit/antigravity-agent-standard/main/tooling/install-web.sh | bash
@@ -56,7 +56,7 @@ rm -rf "$TMP_DIR"
 
 ### 🌍 3. Cài Đặt Toàn Cục Trên Máy Tính (Global Core Level)
 
-> **Mục đích:** Kích hoạt kỷ luật Agent (Governance, Autonomy Levels, Zero Fake Proof, và 6 Workflow Skills chung) cho **MỌI dự án** (Swift, Web, Python, Go...) trên máy tính thông qua `~/.gemini/config/`.
+> **Mục đích:** Kích hoạt kỷ luật Agent (Governance, Autonomy Levels, Zero Fake Proof, và 7 Workflow Skills chung bao gồm `spec-driven-development`) cho **MỌI dự án** (Swift, Web, Python, Go...) trên máy tính thông qua `~/.gemini/config/`.
 
 Mở Terminal tại bất kỳ đâu và dán:
 
@@ -66,9 +66,30 @@ curl -fsSL https://raw.githubusercontent.com/nguyenduongit/antigravity-agent-sta
 
 ---
 
-## 1. Tổng Quan Kiến Trúc Đa Nền Tảng của AAS
+## ⚡ Tính Năng Mới: Spec-Driven Development (SDD Engine)
+*(Tích hợp trực tiếp triết lý từ [github/spec-kit](https://github.com/github/spec-kit))*
 
-AAS được thiết kế theo mô hình **Onion Architecture 3 Tầng** nhằm tái sử dụng tối đa và không bao giờ vượt trần giới hạn ngữ cảnh:
+AAS v1.2.0 tích hợp sẵn quy trình **Spec-Driven Development** giúp loại bỏ hoàn toàn tình trạng "vibe-coding" hoặc lập trình đoán mò khi xây dựng các tính năng lớn:
+
+```
+[ 1. SPECIFY ]             [ 2. PLAN ]                 [ 3. BREAK DOWN ]            [ 4. CONVERGE & VERIFY ]
+User Stories (P1 MVP, P2) ──► Architecture Alignment ──► Actionable Task Checklist ──► AAS Quality Gates
+Acceptance (Given-When-Then)  Interface Contracts (Zod/Swift) Parallel Flags [P]       Proof-First Raw Output
+```
+
+### Cách Sử Dụng SDD trong Chat với Antigravity:
+Sau khi cài đặt AAS vào dự án, bạn chỉ cần yêu cầu:
+> *"Hãy áp dụng skill `spec-driven-development` để lập đặc tả và triển khai tính năng [Tên tính năng]."*
+
+Agent sẽ tự động:
+1. Tạo file đặc tả nghiệp vụ `docs/specs/<feature>/spec.md` (chia rõ P1 MVP, P2, kịch bản Given-When-Then).
+2. Tạo bản thiết kế kỹ thuật `docs/specs/<feature>/plan.md` (rõ ràng các file/module bị ảnh hưởng và hợp đồng interface).
+3. Bẻ nhỏ thành danh sách task chi tiết `docs/specs/<feature>/tasks.md` kèm cờ thực thi song song `[P]`.
+4. Triển khai từng task và kiểm chứng bằng test thực tế trước khi đánh dấu hoàn thành.
+
+---
+
+## 1. Tổng Quan Kiến Trúc Đa Nền Tảng của AAS
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -76,7 +97,7 @@ AAS được thiết kế theo mô hình **Onion Architecture 3 Tầng** nhằm 
 │ Kỷ luật Agent phổ quát (Dùng chung 100% cho Swift, Web, Python...):   │
 │ • Governance (Thứ bậc ưu tiên) • Scope Control (Ranh giới phạm vi)     │
 │ • Autonomy (Balanced Mode)     • Verification (Zero Fake Proof)        │
-│ • Universal Workflow Skills (feature-dev, bug-fixing, refactoring...)  │
+│ • SDD Engine: spec-driven-development, feature-dev, bug-fixing...      │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ Kế thừa
                                     ▼
@@ -94,49 +115,13 @@ AAS được thiết kế theo mô hình **Onion Architecture 3 Tầng** nhằm 
 │ File AGENTS.md gọn nhẹ (< 120 dòng) neo trực tiếp tại từng repository: │
 │ • templates/project-AGENTS.md     (Dành cho Swift macOS)               │
 │ • templates/project-AGENTS-web.md (Dành cho Web Next.js)               │
+│ • templates/spec-kit/             (Mẫu chuẩn: spec, plan, tasks)       │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 2. Cấu Trúc Kho Lưu Trữ Chuẩn
-
-```text
-antigravity-agent-standard/
-├── VERSION                          # Global SemVer specification (1.1.0)
-├── CHANGELOG.md                     # Lịch sử phiên bản & migration notes
-├── README.md                        # Hướng dẫn chọn lệnh theo dự án
-│
-├── tooling/                         # Bộ script cài đặt tự động cho từng stack
-│   ├── install-swift.sh             # 🍎 Installer cho Swift macOS
-│   ├── install-web.sh               # 🌐 Installer cho Web App (Next.js + Supabase)
-│   └── install-global.sh            # 🌍 Installer toàn cục máy tính
-│
-├── core/                            # Layer 1: Universal governance (Dùng chung)
-│   ├── rules/                       # 00-governance -> 06-reporting (< 24 KB)
-│   └── skills/                      # 6 Workflow Skills (On-demand)
-│
-├── platforms/                       # Layer 2: Technology Platform Packs
-│   ├── apple/                       # Apple Pack (macOS 14+, Swift 6)
-│   │   ├── manifest.yaml
-│   │   ├── rules/ & skills/
-│   │   └── blueprints/macos-app/
-│   └── web/                         # Web Pack (Next.js App Router, Supabase)
-│       ├── manifest.yaml
-│       ├── rules/ & skills/
-│       └── blueprints/nextjs-supabase/
-│
-└── templates/                       # Layer 3: Templates neo dự án
-    ├── project-AGENTS.md            # Swift Project Anchor (< 120 dòng)
-    ├── project-AGENTS-web.md        # Web Project Anchor (< 120 dòng)
-    ├── project-manifest.yaml        # Swift Manifest (.aas/project.yaml)
-    ├── project-manifest-web.yaml    # Web Manifest (.aas/project.yaml)
-    └── ADR.md                       # Mẫu Architecture Decision Record
-```
-
----
-
-## 3. Các Bất Biến Kỹ Thuật (Non-Negotiable)
+## 2. Các Bất Biến Kỹ Thuật (Non-Negotiable)
 
 1. **Giới hạn kích thước file:** Toàn bộ rule files đều nhỏ hơn **24 KB / 24,000 bytes** (ngưỡng giới hạn của Antigravity) để tránh bị cắt cụt nội dung ngầm.
 2. **Progressive Disclosure:** Skills không bị nạp toàn bộ vào context mà chỉ nạp metadata (`name`, `description`); nội dung chi tiết chỉ được đọc khi bước thực thi yêu cầu.
