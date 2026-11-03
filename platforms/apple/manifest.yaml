@@ -1,0 +1,35 @@
+name: apple-platform-pack
+version: 1.0.0
+description: AAS Technical Standards, Skills, and Blueprints for Apple Platforms (macOS 14+, Swift 6).
+platform: apple
+minimum_os:
+  macos: "14.0"
+  ios: "17.0"
+language:
+  name: swift
+  version: "6"
+concurrency_mode: complete
+dependencies:
+  third_party_default: none
+  apple_frameworks:
+    - Foundation
+    - SwiftUI
+    - AppKit
+    - OSLog
+    - Combine
+    - SwiftData
+rules:
+  - rules/swift-language.md
+  - rules/swift-concurrency.md
+  - rules/swiftui.md
+  - rules/spm-architecture.md
+  - rules/macos-native.md
+  - rules/testing.md
+skills:
+  - skills/swift-development
+  - skills/swiftui-components
+  - skills/swift-concurrency
+  - skills/spm-module-design
+  - skills/macos-file-access
+blueprints:
+  - blueprints/macos-app
