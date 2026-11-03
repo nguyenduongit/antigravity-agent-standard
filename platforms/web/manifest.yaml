@@ -1,0 +1,31 @@
+name: web-platform-pack
+version: 1.0.0
+description: AAS Technical Standards, Skills, and Blueprints for Modern Web Applications (Next.js App Router, Supabase Edge-First, TypeScript Strict).
+platform: web
+target_stack:
+  framework: Next.js (App Router, Node.js 20+ / React 19)
+  backend: Supabase (PostgreSQL 15+, Edge Functions / Hono, Auth, Storage)
+  language: TypeScript (Strict Mode)
+  styling: Tailwind CSS + Radix UI Primitives (Shadcn UI pattern)
+  contracts: Zod (Shared Schemas & DTOs)
+  state:
+    url_state: nuqs / searchParams
+    server_state: "@tanstack/react-query"
+    client_state: zustand
+  testing:
+    unit: vitest
+    e2e: playwright
+rules:
+  - rules/typescript-contracts.md
+  - rules/backend-edge-first.md
+  - rules/frontend-components.md
+  - rules/state-and-security.md
+  - rules/testing-and-ci.md
+skills:
+  - skills/web-contract-design
+  - skills/supabase-rls-design
+  - skills/edge-function-hono
+  - skills/frontend-component-ui
+  - skills/url-state-management
+blueprints:
+  - blueprints/nextjs-supabase

@@ -1,0 +1,37 @@
+schema_version: 1
+
+project:
+  name: MyWebApp
+  type: web_application
+  platform: web
+  framework: nextjs
+  minimum_node_version: "20.0"
+
+standards:
+  core:
+    version: "1.0.0"
+  platforms:
+    web:
+      version: "1.0.0"
+
+architecture:
+  blueprint: platforms/web/blueprints/nextjs-supabase
+  blueprint_version: "1.0.0"
+
+technology:
+  framework: Next.js (App Router)
+  backend: Supabase (PostgreSQL, Edge Functions)
+  language: typescript
+  language_version: "5.0+"
+  styling: Tailwind CSS + Radix UI
+  state_management:
+    - nuqs
+    - "@tanstack/react-query"
+    - zustand
+
+quality:
+  strict_typescript: true
+  eslint: true
+  tests_required: true
+
+project_overrides: []
