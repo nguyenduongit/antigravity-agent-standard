@@ -22,14 +22,14 @@ Bạn có thể cài đặt AAS vào dự án hoặc toàn bộ máy tính chỉ
 Mở Terminal, di chuyển vào **thư mục gốc của dự án Swift macOS** của bạn, và dán khối lệnh sau:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/antigravity-agent-standard/main/tooling/install-workspace.sh | bash
+curl -fsSL https://raw.githubusercontent.com/nguyenduongit/antigravity-agent-standard/main/tooling/install-workspace.sh | bash
 ```
 
 *(Nếu repository ở chế độ Private hoặc bạn muốn dùng Git trực tiếp, chạy khối lệnh này):*
 
 ```bash
 bash -c '
-REPO_URL="https://github.com/<YOUR_GITHUB_USERNAME>/antigravity-agent-standard.git"
+REPO_URL="https://github.com/nguyenduongit/antigravity-agent-standard.git"
 TMP_DIR=$(mktemp -d)
 echo "==> Đang tải AAS từ GitHub..."
 git clone --depth 1 "$REPO_URL" "$TMP_DIR" >/dev/null 2>&1
@@ -64,14 +64,14 @@ MyMacApp/
 Mở Terminal tại bất kỳ đâu và dán khối lệnh sau:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/antigravity-agent-standard/main/tooling/install-global.sh | bash
+curl -fsSL https://raw.githubusercontent.com/nguyenduongit/antigravity-agent-standard/main/tooling/install-global.sh | bash
 ```
 
 *(Khối lệnh dự phòng qua Git):*
 
 ```bash
 bash -c '
-REPO_URL="https://github.com/<YOUR_GITHUB_USERNAME>/antigravity-agent-standard.git"
+REPO_URL="https://github.com/nguyenduongit/antigravity-agent-standard.git"
 TMP_DIR=$(mktemp -d)
 echo "==> Đang cài đặt AAS Core toàn cục..."
 git clone --depth 1 "$REPO_URL" "$TMP_DIR" >/dev/null 2>&1
