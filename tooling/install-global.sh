@@ -4,7 +4,11 @@
 # ==============================================================================
 set -euo pipefail
 
-GITHUB_REPO="${AAS_REPO:-https://github.com/nguyenquocduong/antigravity-agent-standard.git}"
+REPO_OWNER="${AAS_OWNER:-nguyenduongit}"
+REPO_NAME="${AAS_NAME:-antigravity-agent-standard}"
+GITHUB_REPO="${AAS_REPO:-https://github.com/${REPO_OWNER}/${REPO_NAME}.git}"
+TARBALL_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/archive/refs/heads/main.tar.gz"
+
 GLOBAL_CONFIG_DIR="${HOME}/.gemini/config"
 CLEANUP_TMP=false
 
@@ -19,11 +23,23 @@ elif [ -n "${AAS_SOURCE_DIR:-}" ] && [ -f "${AAS_SOURCE_DIR}/core/rules/00-gover
 else
     TMP_CLONE_DIR=$(mktemp -d)
     CLEANUP_TMP=true
-    echo "📦 Đang tải mã nguồn AAS từ: ${GITHUB_REPO}..."
-    git clone --depth 1 "$GITHUB_REPO" "$TMP_CLONE_DIR" >/dev/null 2>&1 || {
+    echo "📦 Đang tải mã nguồn AAS từ GitHub (${REPO_OWNER}/${REPO_NAME})..."
+    
+    DOWNLOAD_SUCCESS=false
+    if curl -fsSL "$TARBALL_URL" 2>/dev/null | tar -xz -C "$TMP_CLONE_DIR" --strip-components=1 2>/dev/null; then
+        DOWNLOAD_SUCCESS=true
+    fi
+    
+    if [ "$DOWNLOAD_SUCCESS" = false ]; then
+        if git clone --depth 1 "$GITHUB_REPO" "$TMP_CLONE_DIR" >/dev/null 2>&1; then
+            DOWNLOAD_SUCCESS=true
+        fi
+    fi
+
+    if [ "$DOWNLOAD_SUCCESS" = false ]; then
         echo "❌ Lỗi: Không thể tải repository từ ${GITHUB_REPO}."
         exit 1
-    }
+    fi
     AAS_SRC="${TMP_CLONE_DIR}"
 fi
 

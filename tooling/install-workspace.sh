@@ -4,7 +4,11 @@
 # ==============================================================================
 set -euo pipefail
 
-GITHUB_REPO="${AAS_REPO:-https://github.com/nguyenquocduong/antigravity-agent-standard.git}"
+REPO_OWNER="${AAS_OWNER:-nguyenduongit}"
+REPO_NAME="${AAS_NAME:-antigravity-agent-standard}"
+GITHUB_REPO="${AAS_REPO:-https://github.com/${REPO_OWNER}/${REPO_NAME}.git}"
+TARBALL_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/archive/refs/heads/main.tar.gz"
+
 TARGET_DIR="${PWD}"
 CLEANUP_TMP=false
 
@@ -17,15 +21,29 @@ if [ -n "$SCRIPT_DIR" ] && [ -f "${SCRIPT_DIR}/../core/rules/00-governance.md" ]
 elif [ -n "${AAS_SOURCE_DIR:-}" ] && [ -f "${AAS_SOURCE_DIR}/core/rules/00-governance.md" ]; then
     AAS_SRC="${AAS_SOURCE_DIR}"
 else
-    # Nếu chạy qua curl | bash: clone shallow về thư mục tạm
+    # Tải qua tarball hoặc git clone
     TMP_CLONE_DIR=$(mktemp -d)
     CLEANUP_TMP=true
-    echo "📦 Đang tải mã nguồn AAS từ: ${GITHUB_REPO}..."
-    git clone --depth 1 "$GITHUB_REPO" "$TMP_CLONE_DIR" >/dev/null 2>&1 || {
+    echo "📦 Đang tải mã nguồn AAS từ GitHub (${REPO_OWNER}/${REPO_NAME})..."
+    
+    DOWNLOAD_SUCCESS=false
+    # Cách 1: Tải nhanh qua Tarball archive (không cần git)
+    if curl -fsSL "$TARBALL_URL" 2>/dev/null | tar -xz -C "$TMP_CLONE_DIR" --strip-components=1 2>/dev/null; then
+        DOWNLOAD_SUCCESS=true
+    fi
+    
+    # Cách 2: Dự phòng bằng git clone nếu tarball thất bại
+    if [ "$DOWNLOAD_SUCCESS" = false ]; then
+        if git clone --depth 1 "$GITHUB_REPO" "$TMP_CLONE_DIR" >/dev/null 2>&1; then
+            DOWNLOAD_SUCCESS=true
+        fi
+    fi
+
+    if [ "$DOWNLOAD_SUCCESS" = false ]; then
         echo "❌ Lỗi: Không thể tải repository từ ${GITHUB_REPO}."
         echo "   Vui lòng kiểm tra lại URL hoặc đặt biến môi trường: AAS_REPO=https://github.com/USER/REPO.git"
         exit 1
-    }
+    fi
     AAS_SRC="${TMP_CLONE_DIR}"
 fi
 
@@ -72,9 +90,9 @@ fi
 echo ""
 echo "✅ [AAS] Cài đặt Workspace thành công!"
 echo "📁 Các file đã được đặt vào đúng vị trí:"
-echo "   - Project Anchor:      ./AGENTS.md (< 120 dòng)"
-echo "   - Workspace Rules:     ./.agents/rules/ (12 rules)"
-echo "   - Workspace Skills:    ./.agents/skills/ (11 skills)"
-echo "   - Project Manifest:    ./.aas/project.yaml"
+echo "   - Project Anchor:       ./AGENTS.md (< 120 dòng)"
+echo "   - Workspace Rules:      ./.agents/rules/ (12 rules)"
+echo "   - Workspace Skills:     ./.agents/skills/ (11 skills)"
+echo "   - Project Manifest:     ./.aas/project.yaml"
 echo "   - Architecture Scripts: ./Scripts/*.sh"
 echo "🎉 Agent Antigravity đã sẵn sàng làm việc với kiến trúc chuẩn AAS!"

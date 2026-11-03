@@ -10,9 +10,6 @@
 
 Bạn có thể cài đặt AAS vào dự án hoặc toàn bộ máy tính chỉ bằng cách **sao chép và dán 1 khối lệnh duy nhất** vào Terminal.
 
-> [!TIP]
-> Thay thế `<YOUR_GITHUB_USERNAME>` bằng tên tài khoản GitHub của bạn sau khi bạn đẩy repository này lên GitHub.
-
 ---
 
 ### CÁCH 1: Cài đặt vào một Dự án Swift macOS (Workspace Level)
@@ -25,7 +22,7 @@ Mở Terminal, di chuyển vào **thư mục gốc của dự án Swift macOS** 
 curl -fsSL https://raw.githubusercontent.com/nguyenduongit/antigravity-agent-standard/main/tooling/install-workspace.sh | bash
 ```
 
-*(Nếu repository ở chế độ Private hoặc bạn muốn dùng Git trực tiếp, chạy khối lệnh này):*
+*(Nếu repository ở chế độ Private hoặc bạn muốn dùng Git clone trực tiếp, chạy khối lệnh này):*
 
 ```bash
 bash -c '
